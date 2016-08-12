@@ -1,5 +1,7 @@
 # CapyTracker
 
+[![Code Climate](https://codeclimate.com/github/haskellcamargo/capy-tracker/badges/gpa.svg)](https://codeclimate.com/github/haskellcamargo/capy-tracker)
+
 A Node-compliant user tracking library made with <img src='https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-128.png' width='16' height='16' alt='love' /> and JS.
 
 CapyTracker is a session tracker. It'll fetch informations like visited pages, browser name and version, date and session durations and send over your customized API.

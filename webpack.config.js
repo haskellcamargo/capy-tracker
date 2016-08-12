@@ -23,6 +23,7 @@
  */
 var webpack = require('webpack')
 var minify = -1 !== process.argv.indexOf('--minify')
+var path = require('path')
 
 /**
  * Webpack configuration file
@@ -30,21 +31,21 @@ var minify = -1 !== process.argv.indexOf('--minify')
  * compiling ES6 files to ES5 (with Babel)
  */
 module.exports = {
-    context: __dirname + '/lib',
+    context: path.join(__dirname, '/lib'),
     entry: ["./index.js"],
     output: {
-        path: __dirname + '/dist',
+        path: path.join(__dirname, '/dist'),
         filename: minify ? 'capy-tracker.min.js' : 'capy-tracker.js',
         publicPath: '/',
         libraryTarget: 'var',
         library: 'CapyTracker'
     },
     resolve: {
-        extensions: ['', '.js'],
+        extensions: ['', '.js']
     },
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
         ]
     },
     plugins: minify ? [new webpack.optimize.UglifyJsPlugin()] : []
