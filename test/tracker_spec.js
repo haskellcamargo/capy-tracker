@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import {expect} from 'chai'
-import CapyTracker from '../app/index'
+import CapyTracker from '../lib/index'
 import * as jsdom from 'mocha-jsdom'
 
 describe('CapyTracker', () => {
@@ -47,7 +47,7 @@ describe('CapyTracker', () => {
 
         it('extracts host and path information', () => {
             mockLocalStorage(window)
-            const tracker = new CapyTracker(window)
+            const tracker = new CapyTracker({ target: window })
 
             expect(tracker.collectData().url).to.deep.equal({
                 hostname: 'news.ycombinator.com',
@@ -56,12 +56,12 @@ describe('CapyTracker', () => {
         })
 
         it('receives the date in a correct format', () => {
-            const tracker = new CapyTracker(window)
+            const tracker = new CapyTracker({ target: window })
             expect(tracker.collectData().date).to.match(/\d+/)
         })
 
         it('creates a valid session when it does not exist', () => {
-            const tracker = new CapyTracker(window)
+            const tracker = new CapyTracker({ target: window })
             expect(tracker.getCurrentSession().isNothing).to.be.true
             tracker.start()
             const newSession = tracker.getCurrentSession()
@@ -73,7 +73,7 @@ describe('CapyTracker', () => {
         })
 
         it('preserves session when it already exists', () => {
-            const tracker = new CapyTracker(window)
+            const tracker = new CapyTracker({ target: window })
             expect(tracker.getCurrentSession().isNothing).to.be.true
             tracker.start()
             const newSession = tracker.getCurrentSession()
@@ -82,11 +82,11 @@ describe('CapyTracker', () => {
         })
 
         it('throws an error when no window object is provided', () => {
-            expect(() => new CapyTracker()).to.throw('Window object is obligatory')
+            expect(() => new CapyTracker()).to.throw('Target object is obligatory')
         })
 
         it('receives browser info', () => {
-            const tracker = new CapyTracker(window)
+            const tracker = new CapyTracker({ target: window })
             const browser = tracker.collectData().browser
 
             expect(browser.version).to.have.length.of.at.least(2)
@@ -94,8 +94,8 @@ describe('CapyTracker', () => {
         })
 
         it('preserves passed API url', () => {
-            const tracker = new CapyTracker(window, 'http://localhost:666/api')
-            expect(tracker.api).to.equal('http://localhost:666/api')
+            const tracker = new CapyTracker({ target: window, api: 'http://localhost:666/api' })
+            expect(tracker.props.api).to.equal('http://localhost:666/api')
         })
     })
 })

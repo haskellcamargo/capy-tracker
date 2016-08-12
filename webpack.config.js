@@ -30,7 +30,7 @@ var minify = -1 !== process.argv.indexOf('--minify')
  * compiling ES6 files to ES5 (with Babel)
  */
 module.exports = {
-    context: __dirname + '/app',
+    context: __dirname + '/lib',
     entry: ["./index.js"],
     output: {
         path: __dirname + '/dist',
