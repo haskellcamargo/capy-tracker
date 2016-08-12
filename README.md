@@ -1,6 +1,7 @@
 # CapyTracker
 
 [![npm version](https://badge.fury.io/js/capy-tracker.svg)](https://badge.fury.io/js/capy-tracker)
+[![Travis Status](https://api.travis-ci.org/haskellcamargo/capy-tracker.svg?branch=master)](https://travis-ci.org/haskellcamargo/capy-tracker)
 [![Code Climate](https://codeclimate.com/github/haskellcamargo/capy-tracker/badges/gpa.svg)](https://codeclimate.com/github/haskellcamargo/capy-tracker)
 [![Issue Count](https://codeclimate.com/github/haskellcamargo/capy-tracker/badges/issue_count.svg)](https://codeclimate.com/github/haskellcamargo/capy-tracker)
 
