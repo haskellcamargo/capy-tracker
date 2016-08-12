@@ -7,6 +7,8 @@
 
 A Node-compliant user tracking library made with <img src='https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-128.png' width='16' height='16' alt='love' /> and JS.
 
+![CapyTracker](http://i.imgur.com/EpvXgNq.jpg)
+
 CapyTracker is a session tracker. It'll fetch informations like visited pages, browser name and version, date and session durations and send over your customized API.
 
 ## Installation
@@ -69,3 +71,6 @@ The API should be compliant with the following
 - The request body will contain a JSON with a `type` entry (`SESSION` or `DURATION`)
 - When `SESSION`, `data` will contain the content of calling `collectData`
 - When `DURATION`, `data` will contain the number representation of the time interval
+
+
+A special thanks to [@ythecombinator](https://github.com/ythecombinator/), who provided me the logo!
