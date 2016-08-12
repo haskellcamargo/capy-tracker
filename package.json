@@ -39,9 +39,9 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.13.1",
-    "data.maybe": "^1.2.2",
-    "detect-browser": "^1.4.0",
-    "uuid": "^2.0.2"
+    "axios": "0.13.1",
+    "data.maybe": "1.2.2",
+    "detect-browser": "1.4.0",
+    "uuid": "2.0.2"
   }
 }
