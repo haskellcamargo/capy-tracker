@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Sample by haskellcamargo</title>
+    <title>CapyTracker by haskellcamargo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,21 +11,87 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Sample</h1>
-      <h2 class="project-tagline">Sample project</h2>
-      <a href="https://github.com/haskellcamargo/sample" class="btn">View on GitHub</a>
-      <a href="https://github.com/haskellcamargo/sample/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/haskellcamargo/sample/tarball/master" class="btn">Download .tar.gz</a>
+      <h1 class="project-name">CapyTracker</h1>
+      <h2 class="project-tagline">Track your user with love!</h2>
+      <a href="https://github.com/haskellcamargo/capy-tracker" class="btn">View on GitHub</a>
+      <a href="https://github.com/haskellcamargo/capy-tracker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/haskellcamargo/capy-tracker/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
       <h1>
-<a id="sample" class="anchor" href="#sample" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sample</h1>
+<a id="capytracker" class="anchor" href="#capytracker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CapyTracker</h1>
 
-<p>Sample project</p>
+<p>A Node-compliant user tracking library made with <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-128.png" width="16" height="16" alt="love"> and JS.</p>
+
+<p>CapyTracker is a session tracker. It'll fetch informations like visited pages, browser name and version, date and session durations and send over your customized API.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>You can install the library directly via <a href="https://www.npmjs.com/package/capy-tracker"><code>npm</code></a> and add it as a dependency for your project:</p>
+
+<p><code>npm install --save capy-tracker</code></p>
+
+<p>If you are a power user, you may want to compile from sources. It is also quite simple!</p>
+
+<div class="highlight highlight-source-shell"><pre>sudo npm install -g webpack
+git clone --depth=1 https://github.com/haskellcamargo/capy-tracker.git
+<span class="pl-c1">cd</span> capy-tracker/
+npm install
+webpack
+webpack --minify</pre></div>
+
+<p>The source files <code>capy-tracker.js</code> and <code>capy-tracker.min.js</code> will be generate inside <code>dist/</code> directory.
+If you want to run the tests, do <code>npm test</code>:</p>
+
+<p><img src="http://i.imgur.com/VXz0vjl.png" alt="npm test"></p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Include <code>capy-tracker.min.js</code> in every page you want to track. The library has no autoload, you must initialize it (believe, side-effects aren't cool). The library exports the <code>CapyTracker</code> object-class.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">definitelyNotATracker</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">CapyTracker</span>({ target<span class="pl-k">:</span> <span class="pl-c1">window</span>, api<span class="pl-k">:</span> apiUrl });
+<span class="pl-smi">definitelyNotATracker</span>.<span class="pl-c1">start</span>();</pre></div>
+
+<p><code>.start()</code> will trigger the initialization. If a user session already exists, CapyTracker will take it; otherwise, a session will be created.</p>
+
+<p>The tracker receives in its constructor an object containing the <code>target</code> (<code>window</code>, unless you are on Node) and the the <code>api</code> (URL). It'll touch the API everytime an interaction happens.</p>
+
+<h2>
+<a id="prototype" class="anchor" href="#prototype" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prototype</h2>
+
+<p>The following methods are exposed:</p>
+
+<div class="highlight highlight-source-haskell"><pre><span class="pl-en">getCurrentSession</span> :: <span class="pl-c1">Maybe</span> <span class="pl-smi">string</span> <span class="pl-c">-- Returns a monad containing "Just" the current session or "Nothing"</span>
+<span class="pl-en">start</span> :: <span class="pl-c1">()</span> <span class="pl-c">-- Initializes a session or reuses the current one</span>
+<span class="pl-en">trackTime</span> :: <span class="pl-c1">()</span> <span class="pl-c">-- Call this after `start` if you want to log when user quits your page</span>
+<span class="pl-en">stop</span> :: <span class="pl-c1">()</span> <span class="pl-c">-- Kills the current session permanently</span>
+<span class="pl-en">collectData</span> :: {
+  <span class="pl-en">url</span> :: { <span class="pl-smi">hostname</span> :: <span class="pl-smi">string</span>, <span class="pl-smi">pathname</span> :: <span class="pl-smi">string</span> },
+  <span class="pl-en">date</span> :: <span class="pl-smi">number</span>,
+  <span class="pl-en">browser</span> :: { <span class="pl-smi">name</span> :: <span class="pl-smi">string</span>, <span class="pl-smi">version</span> :: <span class="pl-smi">string</span> }
+} <span class="pl-c">-- Purely gives the current information</span></pre></div>
+
+<h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API</h2>
+
+<p>The API should be compliant with the following</p>
+
+<ul>
+<li>Signals will be sent over <strong>POST</strong>
+</li>
+<li>The request body will contain a JSON with a <code>type</code> entry (<code>SESSION</code> or <code>DURATION</code>)</li>
+<li>When <code>SESSION</code>, <code>data</code> will contain the content of calling <code>collectData</code>
+</li>
+<li>When <code>DURATION</code>, <code>data</code> will contain the number representation of the time interval</li>
+</ul>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/haskellcamargo/sample">Sample</a> is maintained by <a href="https://github.com/haskellcamargo">haskellcamargo</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/haskellcamargo/capy-tracker">CapyTracker</a> is maintained by <a href="https://github.com/haskellcamargo">haskellcamargo</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
