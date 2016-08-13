@@ -59,10 +59,10 @@ stop :: () -- Kills the current session permanently
 collectData :: {
   url :: { hostname :: string, pathname :: string },
   date :: number,
-  browser :: { name :: string, version :: string }
+  browser :: { name :: string, version :: string },
+  session :: string
 } -- Purely gives the current information
 ```
-
 ## API
 
 The API should be compliant with the following
