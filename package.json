@@ -1,6 +1,6 @@
 {
   "name": "capy-tracker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "User navigation tracking library made with love",
   "main": "index.js",
   "scripts": {
