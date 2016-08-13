@@ -48,16 +48,21 @@ describe('CapyTracker', () => {
         it('extracts host and path information', () => {
             mockLocalStorage(window)
             const tracker = new CapyTracker({ target: window })
+            tracker.start()
 
             expect(tracker.collectData().url).to.deep.equal({
                 hostname: 'news.ycombinator.com',
                 pathname: '/newcomments'
             })
+
+            tracker.stop()
         })
 
         it('receives the date in a correct format', () => {
             const tracker = new CapyTracker({ target: window })
+            tracker.start()
             expect(tracker.collectData().date).to.match(/\d+/)
+            tracker.stop()
         })
 
         it('creates a valid session when it does not exist', () => {
@@ -87,10 +92,13 @@ describe('CapyTracker', () => {
 
         it('receives browser info', () => {
             const tracker = new CapyTracker({ target: window })
+            tracker.start()
             const browser = tracker.collectData().browser
 
             expect(browser.version).to.have.length.of.at.least(2)
             expect(browser.name).to.equal('node')
+
+            tracker.stop()
         })
 
         it('preserves passed API url', () => {
